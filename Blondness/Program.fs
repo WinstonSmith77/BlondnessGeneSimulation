@@ -8,8 +8,8 @@ open System
 
 [<EntryPoint>]
 let main argv = 
-    let numberOfIndividuals = 1000
-    let start = List.init numberOfIndividuals  (fun index -> Bio.createByGod())
+    let numberOfIndividuals = 100000
+    let start = List.init numberOfIndividuals  (fun index -> Bio.create())
 
     let areBlond =  List.filter Bio.isBlond start |> List.length
 
