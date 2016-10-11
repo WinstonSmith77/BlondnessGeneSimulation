@@ -6,4 +6,4 @@
 
     let breed mother father = {GeneA = Random.pickAOrBRandom mother.GeneA father.GeneA; GeneB = Random.pickAOrBRandom mother.GeneB father.GeneB}
 
-    let create () = {GeneA = Random.systemRandomBool(); GeneB = Random.systemRandomBool()}
+    let create isBlond = {GeneA = isBlond; GeneB = isBlond}
