@@ -6,38 +6,34 @@ open System
 open Logic
 
 [<Literal>]
-let numberOfBlond = 1000
+let numberOfBlond = 200000
 
 [<Literal>]
-let numberOfNonBlond = 1000
+let numberOfNonBlond = 800000
 
 [<Literal>]
-let numberIterations = 10000
+let numberIterations = 300
 
-let firstGeneration () = 
-   
-    let blondGuys = List.init numberOfBlond (fun index -> Bio.create Feature.Has)
-    let nonBlondGuys = List.init numberOfNonBlond (fun index -> Bio.create Feature.DontHas)
-
+let firstGeneration() = 
+    let blondGuys = List.init numberOfBlond (fun index -> create Feature.Has)
+    let nonBlondGuys = List.init numberOfNonBlond (fun index -> create Feature.DontHas)
     List.append blondGuys nonBlondGuys
 
 [<EntryPoint>]
 let main argv = 
     let start = firstGeneration()
-   
-    let after = Logic.repeat (fun input -> Bio.nextGeneration input) start numberIterations
-
-    let areBlond =
-        after
-        |> List.filter Bio.isBlond 
+    let currentGeneartion = Logic.repeat (fun input -> nextGeneration input) start numberIterations
+    
+    let areBlond = 
+        currentGeneartion
+        |> List.filter Bio.isBlond
         |> List.length
-
-    let hasBlondGenes =
-        after
-        |> List.filter Bio.hasBlondGenes 
+    
+    let hasBlondGenes = 
+        currentGeneartion
+        |> List.filter Bio.hasBlondGenes
         |> List.length
-
-   
+    
     let percentageBlond = (float areBlond) / (List.length start |> float)
     let percentageBlondGenes = (float hasBlondGenes) / (List.length start |> float)
     printfn "Blond %A BlondGenes %A" percentageBlond percentageBlondGenes

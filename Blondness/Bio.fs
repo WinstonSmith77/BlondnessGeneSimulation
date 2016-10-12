@@ -6,7 +6,7 @@
 
     let isBlond gene = gene.GeneA = Feature.Has && gene.GeneB = Feature.Has
 
-    let breed mother father = {GeneA = Random.pickAOrBRandom mother.GeneA father.GeneA; GeneB = Random.pickAOrBRandom mother.GeneB father.GeneB}
+    let breed mother father = {GeneA = pickAOrBRandom mother.GeneA father.GeneA; GeneB = pickAOrBRandom mother.GeneB father.GeneB}
 
     let create isBlond = {GeneA = isBlond; GeneB = isBlond}
 
