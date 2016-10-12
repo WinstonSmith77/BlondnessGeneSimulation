@@ -6,36 +6,50 @@ open System
 open Logic
 
 [<Literal>]
-let numberOfBlond = 200000
+let numberOfBlond = 8000
 
 [<Literal>]
-let numberOfNonBlond = 800000
+let numberOfNonBlond = 32000
 
 [<Literal>]
-let numberIterations = 300
+let numberIterations = 3000
+
+[<Literal>]
+let logEach = 10
 
 let firstGeneration() = 
     let blondGuys = List.init numberOfBlond (fun index -> create Feature.Has)
     let nonBlondGuys = List.init numberOfNonBlond (fun index -> create Feature.DontHas)
     List.append blondGuys nonBlondGuys
 
-[<EntryPoint>]
-let main argv = 
-    let start = firstGeneration()
-    let currentGeneartion = Logic.repeat (fun input -> nextGeneration input) start numberIterations
-    
+let log start current index=
     let areBlond = 
-        currentGeneartion
-        |> List.filter Bio.isBlond
+        current
+        |> List.filter isBlond
         |> List.length
     
     let hasBlondGenes = 
-        currentGeneartion
-        |> List.filter Bio.hasBlondGenes
+        current
+        |> List.filter hasBlondGenes
         |> List.length
     
     let percentageBlond = (float areBlond) / (List.length start |> float)
     let percentageBlondGenes = (float hasBlondGenes) / (List.length start |> float)
-    printfn "Blond %A BlondGenes %A" percentageBlond percentageBlondGenes
+    printfn "Generation %A Blond %A BlondGenes %A" index percentageBlond percentageBlondGenes
+    
+
+[<EntryPoint>]
+let main argv = 
+    let start = firstGeneration()
+
+    let createNextGeneration index current = 
+        let next =nextGeneration current
+        if index % logEach = 0 then
+            log start next (numberIterations - index)
+        next
+
+    let current = Logic.repeat createNextGeneration start numberIterations
+    
+    log start current numberIterations
     let unused = Console.ReadLine()
     0
