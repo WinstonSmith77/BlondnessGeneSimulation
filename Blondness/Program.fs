@@ -21,8 +21,6 @@ let firstGeneration () =
 
     List.append blondGuys nonBlondGuys
 
-
-
 [<EntryPoint>]
 let main argv = 
     let start = firstGeneration()
