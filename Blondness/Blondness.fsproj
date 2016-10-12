@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
     <None Include="App.config" />
+    <Compile Include="logic.fs" />
     <Compile Include="Random.fs" />
     <Compile Include="Bio.fs" />
     <Compile Include="Program.fs" />

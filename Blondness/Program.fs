@@ -3,27 +3,36 @@
 open Random
 open Bio
 open System
+open Logic
 
-let init = 
-    let numberOfBlond = 100
-    let blondGuys = List.init numberOfBlond (fun index -> Bio.create true)
+[<Literal>]
+let numberOfBlond = 1000
 
-    let numberOfNonBlond = 1000
-    let nonBlondGuys = List.init numberOfNonBlond (fun index -> Bio.create false)
+[<Literal>]
+let numberOfNonBlond = 100
+
+[<Literal>]
+let numberIterations = 10000
+
+let firstGeneration () = 
+   
+    let blondGuys = List.init numberOfBlond (fun index -> Bio.create Feature.Has)
+    let nonBlondGuys = List.init numberOfNonBlond (fun index -> Bio.create Feature.DontHas)
 
     List.append blondGuys nonBlondGuys
 
+
+
 [<EntryPoint>]
 let main argv = 
-    let all = init
+    let start = firstGeneration()
+    let areBlond =
+        Logic.repeat (fun input -> Bio.nextGeneration input) start numberIterations
+        |> List.filter Bio.isBlond 
+        |> List.length
 
-    let all = Random.shuffle all
-
-
-    let dummy = Random.shuffle [1..100]
-
-    let areBlond = List.filter Bio.isBlond all |> List.length
-    let percentage = (float areBlond) / (List.length all |> float)
+   
+    let percentage = (float areBlond) / (List.length start |> float)
     printfn "%A" percentage
     let unused = Console.ReadLine()
     0
