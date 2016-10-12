@@ -1,8 +1,10 @@
 ﻿module Logic
 
-let rec repeat whatToRepeat start numberOfRepeats =
+let rec Repeat whatToRepeat start numberOfRepeats =
     if numberOfRepeats > 0 then 
         let start = whatToRepeat numberOfRepeats start
-        repeat whatToRepeat start (numberOfRepeats - 1)
+        Repeat whatToRepeat start (numberOfRepeats - 1)
     else
         start
+
+let HowManySatisfy pred = Seq.filter pred >> Seq.length

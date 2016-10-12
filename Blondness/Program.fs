@@ -6,32 +6,26 @@ open System
 open Logic
 
 [<Literal>]
-let numberOfBlond = 8000
+let numberOfBlond = 1000
 
 [<Literal>]
-let numberOfNonBlond = 32000
+let numberOfNonBlond = 16000
 
 [<Literal>]
-let numberIterations = 3000
+let numberIterations = 30000
 
 [<Literal>]
-let logEach = 10
+let logEach = 100
 
 let firstGeneration() = 
-    let blondGuys = List.init numberOfBlond (fun index -> create Feature.Has)
-    let nonBlondGuys = List.init numberOfNonBlond (fun index -> create Feature.DontHas)
+    let blondGuys = List.init numberOfBlond (fun index -> CreatePerson Feature.Has)
+    let nonBlondGuys = List.init numberOfNonBlond (fun index -> CreatePerson Feature.DontHas)
     List.append blondGuys nonBlondGuys
 
 let log start current index=
-    let areBlond = 
-        current
-        |> List.filter isBlond
-        |> List.length
+    let areBlond = HowManySatisfy IsBlond current
     
-    let hasBlondGenes = 
-        current
-        |> List.filter hasBlondGenes
-        |> List.length
+    let hasBlondGenes = HowManySatisfy HasBlondGenes current
     
     let percentageBlond = (float areBlond) / (List.length start |> float)
     let percentageBlondGenes = (float hasBlondGenes) / (List.length start |> float)
@@ -43,12 +37,12 @@ let main argv =
     let start = firstGeneration()
 
     let createNextGeneration index current = 
-        let next =nextGeneration current
+        let next = nextGeneration current
         if index % logEach = 0 then
             log start next (numberIterations - index)
         next
 
-    let current = Logic.repeat createNextGeneration start numberIterations
+    let current = Repeat createNextGeneration start numberIterations
     
     log start current numberIterations
     let unused = Console.ReadLine()
