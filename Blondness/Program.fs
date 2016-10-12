@@ -9,7 +9,7 @@ open Logic
 let numberOfBlond = 1000
 
 [<Literal>]
-let numberOfNonBlond = 100
+let numberOfNonBlond = 1000
 
 [<Literal>]
 let numberIterations = 10000
@@ -24,13 +24,22 @@ let firstGeneration () =
 [<EntryPoint>]
 let main argv = 
     let start = firstGeneration()
+   
+    let after = Logic.repeat (fun input -> Bio.nextGeneration input) start numberIterations
+
     let areBlond =
-        Logic.repeat (fun input -> Bio.nextGeneration input) start numberIterations
+        after
         |> List.filter Bio.isBlond 
         |> List.length
 
+    let hasBlondGenes =
+        after
+        |> List.filter Bio.hasBlondGenes 
+        |> List.length
+
    
-    let percentage = (float areBlond) / (List.length start |> float)
-    printfn "%A" percentage
+    let percentageBlond = (float areBlond) / (List.length start |> float)
+    let percentageBlondGenes = (float hasBlondGenes) / (List.length start |> float)
+    printfn "Blond %A BlondGenes %A" percentageBlond percentageBlondGenes
     let unused = Console.ReadLine()
     0

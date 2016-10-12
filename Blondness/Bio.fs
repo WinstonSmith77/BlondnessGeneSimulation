@@ -4,11 +4,13 @@
     type Feature = Has=0 | DontHas=1 
     type Person = { GeneA : Feature ; GeneB : Feature } 
 
-    let isBlond gene = gene.GeneA = Feature.Has && gene.GeneB= Feature.Has
+    let isBlond gene = gene.GeneA = Feature.Has && gene.GeneB = Feature.Has
 
     let breed mother father = {GeneA = Random.pickAOrBRandom mother.GeneA father.GeneA; GeneB = Random.pickAOrBRandom mother.GeneB father.GeneB}
 
     let create isBlond = {GeneA = isBlond; GeneB = isBlond}
+
+    let hasBlondGenes gene = gene.GeneA = Feature.Has || gene.GeneB = Feature.Has
 
     let nextGeneration current =
         let halfLenght = (List.length current) /2 
