@@ -6,16 +6,16 @@ open System
 open Logic
 
 [<Literal>]
-let numberOfBlond = 1000
+let numberOfBlond = 10000
 
 [<Literal>]
-let numberOfNonBlond = 16000
+let numberOfNonBlond = 160000
 
 [<Literal>]
-let numberIterations = 30000
+let numberIterations = 3000
 
 [<Literal>]
-let logEach = 100
+let logEach = 20
 
 let CreateFirstGeneration() = 
     let blondGuys = List.init numberOfBlond (fun index -> CreatePerson Feature.Has)
@@ -34,8 +34,8 @@ let Log length current index=
 
 [<EntryPoint>]
 let main argv = 
-    let start = CreateFirstGeneration()
-    let length = Seq.length start
+    let firstGeneration = CreateFirstGeneration()
+    let length = Seq.length firstGeneration
 
     let createNextGeneration index current = 
         let next = nextGeneration current
@@ -43,9 +43,9 @@ let main argv =
             Log length next (numberIterations - index)
         next
 
-    let current = Repeat createNextGeneration start numberIterations
+    let lastGeneration = Repeat createNextGeneration firstGeneration numberIterations
     
-    Log length current numberIterations
+    Log length lastGeneration numberIterations
     ignore(Console.ReadLine())
    
     0
