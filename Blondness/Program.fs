@@ -17,33 +17,35 @@ let numberIterations = 30000
 [<Literal>]
 let logEach = 100
 
-let firstGeneration() = 
+let CreateFirstGeneration() = 
     let blondGuys = List.init numberOfBlond (fun index -> CreatePerson Feature.Has)
     let nonBlondGuys = List.init numberOfNonBlond (fun index -> CreatePerson Feature.DontHas)
     List.append blondGuys nonBlondGuys
 
-let log start current index=
+let Log length current index=
     let areBlond = HowManySatisfy IsBlond current
     
     let hasBlondGenes = HowManySatisfy HasBlondGenes current
     
-    let percentageBlond = (float areBlond) / (List.length start |> float)
-    let percentageBlondGenes = (float hasBlondGenes) / (List.length start |> float)
+    let percentageBlond = (float areBlond) / (length |> float)
+    let percentageBlondGenes = (float hasBlondGenes) / (length |> float)
     printfn "Generation %A Blond %A BlondGenes %A" index percentageBlond percentageBlondGenes
     
 
 [<EntryPoint>]
 let main argv = 
-    let start = firstGeneration()
+    let start = CreateFirstGeneration()
+    let length = Seq.length start
 
     let createNextGeneration index current = 
         let next = nextGeneration current
         if index % logEach = 0 then
-            log start next (numberIterations - index)
+            Log length next (numberIterations - index)
         next
 
     let current = Repeat createNextGeneration start numberIterations
     
-    log start current numberIterations
-    let unused = Console.ReadLine()
+    Log length current numberIterations
+    ignore(Console.ReadLine())
+   
     0
