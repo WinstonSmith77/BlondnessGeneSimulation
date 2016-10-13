@@ -34,6 +34,12 @@ let Log length current index=
 
 [<EntryPoint>]
 let main argv = 
+
+    let bla = List.init 1000000 (fun index -> CreatePerson  <| PickAOrBRandom Feature.Has Feature.DontHas)
+    let hasBlondGenes = HowManySatisfy HasBlondGenes bla
+    let hasBlonde = HowManySatisfy IsBlond bla
+
+
     let firstGeneration = CreateFirstGeneration()
     let length = Seq.length firstGeneration
 

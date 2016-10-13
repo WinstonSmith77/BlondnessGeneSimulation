@@ -1,6 +1,6 @@
 ﻿module Random
     let generateRandom = System.Random()
-    let systemRandomBool () = generateRandom.NextDouble() >= 0.5  
+    let systemRandomBool () = generateRandom.Next(2) = 0  
 
     let PickAOrB random a b  = 
         if random()  then 
