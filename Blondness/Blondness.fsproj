@@ -49,10 +49,11 @@
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
     <None Include="App.config" />
-    <Compile Include="logic.fs" />
+    <Compile Include="Logic.fs" />
     <Compile Include="Random.fs" />
     <Compile Include="Bio.fs" />
     <Compile Include="Program.fs" />
+    <None Include="Script1.fsx" />
   </ItemGroup>
   <PropertyGroup>
     <MinimumVisualStudioVersion Condition="'$(MinimumVisualStudioVersion)' == ''">11</MinimumVisualStudioVersion>
