@@ -38,7 +38,7 @@ let main argv =
     let length = Seq.length firstGeneration
 
     let createNextGeneration index current = 
-        let next = nextGeneration current
+        let next = NextGeneration current
         if index % logEach = 0 then
             Log length next (numberIterations - index)
         next

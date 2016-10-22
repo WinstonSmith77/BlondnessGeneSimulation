@@ -16,7 +16,7 @@
 
     let HasBlondGenes person = person.GeneA = Feature.Has || person.GeneB = Feature.Has
 
-    let nextGeneration current =
+    let NextGeneration current =
         let halfLenght = (List.length current) /2 
         let shuffled = Random.Shuffle current
 
