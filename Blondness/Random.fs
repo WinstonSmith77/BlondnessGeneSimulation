@@ -13,20 +13,7 @@
 
 
     let Shuffle list = 
-        let swap x y (array: _[]) =
-            let tmp = array.[x]
-            array.[x] <- array.[y]
-            array.[y] <- tmp
-
-        let swapRandomly x array  =
-             let n = Array.length array    
-             let y = generateRandom.Next(n - x) + x
-             swap x y array
-             array
-
-        let n = List.length list 
-        let array = Repeat swapRandomly (n - 1) <| List.toArray list 
-           
-        Array.toList array
+      List.sortBy (fun _ -> generateRandom.NextDouble()) list
+      
 
    
