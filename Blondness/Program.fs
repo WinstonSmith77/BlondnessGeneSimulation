@@ -6,16 +6,17 @@ open System
 open Logic
 
 [<Literal>]
-let numberOfBlond = 10000
+let numberOfBlond = 20000
 
 [<Literal>]
-let numberOfNonBlond = 160000
+let numberOfNonBlond = 20000
+
 
 [<Literal>]
-let numberIterations = 3000
+let numberIterations = 30000
 
 [<Literal>]
-let logEach = 20
+let logEach = 50
 
 let CreateFirstGeneration() = 
     let blondGuys = List.init numberOfBlond (fun index -> CreatePerson Feature.Has)

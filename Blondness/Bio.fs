@@ -28,10 +28,10 @@
 
         let foldingHelper acc mother father =
             let firstChild = Breed mother father
-            let acc = List.Cons (firstChild, acc)
+            let acc = firstChild :: acc
 
             let secondChild = Breed mother father
-            let acc = List.Cons (secondChild, acc)
+            let acc = secondChild :: acc
             acc
 
-        List.fold2 foldingHelper List.empty<Person> mothers fathers
+        List.fold2 foldingHelper List.empty mothers fathers
