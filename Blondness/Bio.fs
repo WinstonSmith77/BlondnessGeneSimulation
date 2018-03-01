@@ -1,6 +1,5 @@
 ﻿module Bio
     open Random
-    open Logic
 
     type Feature = Has=0 | DontHas=1 
     type Person = { 
@@ -20,12 +19,8 @@
         let halfLenght = (List.length current) /2 
         let shuffled = Random.Shuffle current
 
-        let mothers = List.take halfLenght shuffled
-        let fathers = List.skip halfLenght shuffled
-
-        let a = HowManySatisfy IsBlond mothers
-        let b = HowManySatisfy IsBlond fathers
-
+        let (mothers, fathers) = List.splitAt halfLenght shuffled
+       
         let foldingHelper acc mother father =
             let firstChild = Breed mother father
             let acc = firstChild :: acc

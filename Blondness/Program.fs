@@ -1,26 +1,24 @@
 ﻿// Learn more about F# at http://fsharp.org
 // See the 'F# Tutorial' project for more help.
-open Random
 open Bio
 open System
 open Logic
 
 [<Literal>]
-let numberOfBlond = 20000
+let numberOfBlond = 10000
 
 [<Literal>]
 let numberOfNonBlond = 20000
 
-
 [<Literal>]
-let numberIterations = 30000
+let numberIterations = 3000
 
 [<Literal>]
 let logEach = 50
 
 let CreateFirstGeneration() = 
-    let blondGuys = List.init numberOfBlond (fun index -> CreatePerson Feature.Has)
-    let nonBlondGuys = List.init numberOfNonBlond (fun index -> CreatePerson Feature.DontHas)
+    let blondGuys = List.init numberOfBlond (fun _ -> CreatePerson Feature.Has)
+    let nonBlondGuys = List.init numberOfNonBlond (fun _ -> CreatePerson Feature.DontHas)
     List.append blondGuys nonBlondGuys
 
 let Log length current index=
@@ -34,7 +32,7 @@ let Log length current index=
     
 
 [<EntryPoint>]
-let main argv = 
+let main _ = 
     let firstGeneration = CreateFirstGeneration()
     let length = Seq.length firstGeneration
 
