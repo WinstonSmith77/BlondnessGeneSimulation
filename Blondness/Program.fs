@@ -17,8 +17,11 @@ let numberIterations = 3000
 let logEach = 50
 
 let CreateFirstGeneration() = 
-    let blondGuys = List.init numberOfBlond (fun _ -> CreatePerson Feature.Has)
-    let nonBlondGuys = List.init numberOfNonBlond (fun _ -> CreatePerson Feature.DontHas)
+    let blond = CreatePerson Feature.Has
+    let blondGuys = List.init numberOfBlond (fun _ -> blond)
+
+    let nonBlond = CreatePerson Feature.DontHas
+    let nonBlondGuys = List.init numberOfNonBlond  (fun _ -> nonBlond)
     List.append blondGuys nonBlondGuys
 
 let Log length current index=
